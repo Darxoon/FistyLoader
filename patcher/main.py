@@ -59,8 +59,8 @@ def dev_main():
         hooks_str = f.read()
     
     if not isfile('out.exe') or (len(argv) >= 2 and argv[1] in ['--clean', '-c']):
-        print('Reading WorldofGoo2.exe...')
-        pe = PE("WorldofGoo2.exe")
+        print('Reading WorldOfGoo2.exe...')
+        pe = PE("WorldOfGoo2.exe")
         
         add_section_header(pe, len(section_content))
         

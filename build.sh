@@ -1,10 +1,10 @@
 #!/bin/bash
 preprocess() {
+    mkdir -p patch/build
     python3 patcher/preprocess_hooks.py
 }
 
 compile() {
-    mkdir -p patch/build
     nasm patch/main.s -f elf64 -o patch/build/main.o &
     
     CFLAGS="-c -I include -mabi=ms -O2 -fno-stack-protector"
