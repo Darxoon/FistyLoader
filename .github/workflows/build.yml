@@ -1,0 +1,51 @@
+name: Build FistyLoader
+
+on:
+  push:
+    paths:
+      - '.github/workflows/*'
+    branches:
+      - master
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build_linux:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+      
+      # Setup
+    - name: Setup NASM
+      uses: ilammy/setup-nasm@v1.5.1
+    - name: Set up Python 3.11
+      uses: actions/setup-python@v3
+      with:
+        python-version: "3.11"
+    - name: Setup venv
+      run: "python -m venv .venv"
+      
+      # Build linux installer
+    - name: Build linux version
+      run: ./build_installer.sh
+    - name: Package linux version
+      run: tar -cJf dist/FistyLoader_Install.tar.xz dist/FistyLoader_Install
+      
+      # Upload artifacts
+    - name: Upload linux version
+      uses: actions/upload-artifact@v4
+      with:
+        name: FistyLoader_Install
+        path: dist/FistyLoader_Install
+    - name: Upload custom_code
+      uses: actions/upload-artifact@v4
+      with:
+        name: custom_code.bin
+        path: patcher/custom_code.bin
+    - name: Upload custom_code_symbols
+      uses: actions/upload-artifact@v4
+      with:
+        name: custom_code_symbols.o
+        path: patcher/custom_code_symbols.o
