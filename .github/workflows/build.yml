@@ -80,7 +80,7 @@ jobs:
       
       # Build windows installer
     - name: Build windows version
-      run: ./build_installer.sh --no-compile
+      run: bash build_installer.sh --no-compile
       
       # Upload artifacts
     - name: Upload windows version
