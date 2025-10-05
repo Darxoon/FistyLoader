@@ -18,7 +18,13 @@ fi
 
 pip install -r requirements.txt
 
-nasm patch/main.s -o patcher/custom_code.bin
-pyinstaller -F patcher/install.py --add-data patcher/custom_code.bin:. --recursive-copy-metadata readchar --clean
+if [ "$1" != "--no-compile" ]; then
+    # build custom code & custom code symbols
+    ./build.sh --no-debug
+fi
+
+pyinstaller -F patcher/install.py --add-data patcher/custom_code.bin:. \
+    --add-data patcher/custom_code_symbols.o:. --add-data patcher/data/hooks.yaml:data \
+    --recursive-copy-metadata readchar --name FistyLoader_Install --clean
 
 echo Done.

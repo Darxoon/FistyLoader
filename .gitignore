@@ -9,7 +9,8 @@ __pycache__
 game
 disasm
 build
+dist
 
 patcher/custom_code.bin
 symbols.map
-install.spec
+*.spec

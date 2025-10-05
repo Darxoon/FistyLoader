@@ -27,4 +27,8 @@ copy() {
     objcopy patch/build/custom_code.o --only-keep-debug patcher/custom_code_symbols.o
 }
 
-preprocess && compile && link && copy && python3 patcher/main.py "$1"
+build_debug() {
+    [ "$1" != "--no-debug" ] && python3 patcher/main.py "$1"
+}
+
+preprocess && compile && link && copy && build_debug "$@"
