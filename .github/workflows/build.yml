@@ -37,8 +37,8 @@ jobs:
     - name: Upload linux version
       uses: actions/upload-artifact@v4
       with:
-        name: FistyLoader_Install
-        path: dist/FistyLoader_Install
+        name: FistyLoader_Install.tar.xz
+        path: dist/FistyLoader_Install.tar.xz
     - name: Upload custom_code
       uses: actions/upload-artifact@v4
       with:
@@ -49,3 +49,42 @@ jobs:
       with:
         name: custom_code_symbols.o
         path: patcher/custom_code_symbols.o
+  
+  build_windows:
+    runs-on: windows-latest
+    needs:
+      - build_linux
+
+    steps:
+    - uses: actions/checkout@v4
+      
+      # Setup
+    - name: Set up Python 3.11
+      uses: actions/setup-python@v3
+      with:
+        python-version: "3.11"
+    - name: Setup venv
+      run: "python -m venv .venv"
+      
+      # Download artifacts built on linux
+    - name: Download custom_code
+      uses: actions/download-artifact@v4
+      with:
+        name: custom_code.bin
+        path: patcher/
+    - name: Download custom_code_symbols
+      uses: actions/download-artifact@v4
+      with:
+        name: custom_code_symbols.o
+        path: patcher/
+      
+      # Build windows installer
+    - name: Build windows version
+      run: ./build_installer.sh --no-compile
+      
+      # Upload artifacts
+    - name: Upload windows version
+      uses: actions/upload-artifact@v4
+      with:
+        name: FistyLoader_Install.exe
+        path: dist/FistyLoader_Install.exe
