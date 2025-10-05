@@ -163,6 +163,7 @@ def collapse_unk_into_arrays(lines: list[str]) -> list[str]:
 def main():
     if len(argv) != 3:
         print("Usage: process_ghidra_header.py <type name> <ghidra header.h>")
+        return
     
     with open(argv[2], "r") as f:
         input_file = f.read()
