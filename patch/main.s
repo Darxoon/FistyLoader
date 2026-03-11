@@ -7,7 +7,11 @@ extern BallTemplateInfo_deserialize
 
 extern gooballIds
 
-%include "patch/build/hook_returns.inc.s"
+%ifdef STEAM
+%include "ver/steam_win/build/hook_returns.inc.s"
+%else
+%include "ver/win/build/hook_returns.inc.s"
+%endif
 
 extern ball_deserialize_hook2_return_error
 
@@ -63,7 +67,7 @@ load_config_hook:
     mov qword [rsp+8], rbx
     jmp load_config_hook_return
 
-
+%ifdef STEAM
 ; eolgizmo_hook
 ;
 ; Hooks into EOLGizmo::update and makes it use the custom gooballIds
@@ -298,6 +302,7 @@ editor_element_initialize_hook:
     
     jmp editor_element_initialize_hook_return
 
+%endif
 
 ; constants
 msgTitle db "Fisty Loader", 00h

@@ -49,7 +49,7 @@ def patch_game(file: BufferedRandom, game_bytes: bytes, section_content: bytes, 
 
 def resource_path(relative_path):
     """ Get absolute path to resource, works for dev and for PyInstaller """
-    base_path = getattr(sys, '_MEIPASS', path.dirname(path.abspath(__file__)))
+    base_path = getattr(sys, '_MEIPASS', "")
     return path.join(base_path, relative_path)
 
 def dev_main():
@@ -62,9 +62,9 @@ def dev_main():
     parser.add_argument('-c', '--clean', action='store_true')
     args = parser.parse_args()
     
-    custom_code_path = resource_path('bin/custom_code.bin')
-    custom_code_symbols_path = resource_path('bin/custom_code_symbols.o')
-    hooks_path = resource_path(f'data/hooks_{args.type}.yaml')
+    custom_code_path = resource_path(f'ver/{args.type}/build/custom_code.bin')
+    custom_code_symbols_path = resource_path(f'ver/{args.type}/build/custom_code_symbols.o')
+    hooks_path = resource_path(f'ver/{args.type}/hooks.yaml')
     
     executable_name = "WorldOfGoo2.exe" if args.type == "steam_win" else "World of Goo 2.exe"
     

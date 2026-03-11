@@ -23,15 +23,4 @@ _ZN11BallFactoryI19BallTemplateInfoExtE8instanceEv = 0x20e9b0;
 gooballIds = 0x12eede0;
 empty_string = 0xe8898e;
 
-INCLUDE patch/build/hook_returns.inc.ld
-
 ball_deserialize_hook2_return_error = 0x215f62;
-
-SECTIONS
-{
-    . = 0x24FC000;
-    .fisty : {
-        *(.fisty)
-        *(.text)
-    }
-}
