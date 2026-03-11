@@ -28,7 +28,7 @@ copy() {
 }
 
 build_debug() {
-    [ "$1" != "--no-debug" ] && python3 patcher/main.py "$1"
+    [ "$1" != "--no-debug" ] && python3 patcher/main.py $1
 }
 
-preprocess && compile && link && copy && build_debug "$@"
+preprocess && compile && link && copy && build_debug $@

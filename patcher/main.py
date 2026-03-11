@@ -1,3 +1,5 @@
+from argparse import ArgumentParser
+from array import array
 from io import BufferedRandom, BytesIO
 from os import path
 from posixpath import isfile
@@ -13,7 +15,7 @@ from hooks import inject_hooks
 def add_section_header(pe: PE, section_size: int):
     print("Creating section .fisty...")
     section: SectionStructure = pe.sections[-1]
-    section.Name = ".fisty".encode()
+    section.Name = b".fisty"
     # section.Misc = section_size - 0x104
     # section.Misc_PhysicalAddress = section_size - 0x104
     # section.Misc_VirtualSize = section_size - 0x104
@@ -29,8 +31,12 @@ def add_section_header(pe: PE, section_size: int):
     print(f"Virtual address of new section: 0x{section.VirtualAddress:x}")
 
 def patch_game(file: BufferedRandom, game_bytes: bytes, section_content: bytes, symtab: SymbolTableSection, hooks: dict):
-    fisty_section_size = int.from_bytes(game_bytes[0x3d8:0x3dc], byteorder='little')
-    fisty_section_offset = int.from_bytes(game_bytes[0x3dc:0x3e0], byteorder='little')
+    game_bytes_arr: array[int] = array('I', game_bytes)
+    pe_header_start = game_bytes_arr.index(int.from_bytes(b'PE\0\0', byteorder='little'))
+    
+    assert game_bytes[pe_header_start * 4 + 0x270:pe_header_start * 4 + 0x278].strip(b'\0') == b'.fisty'
+    fisty_section_size = game_bytes_arr[pe_header_start + 0xa0]
+    fisty_section_offset = game_bytes_arr[pe_header_start + 0xa1]
     
     if len(section_content) > fisty_section_size:
         raise ValueError("Content of .fisty section is too large!")
@@ -47,9 +53,20 @@ def resource_path(relative_path):
     return path.join(base_path, relative_path)
 
 def dev_main():
+    parser = ArgumentParser(
+        prog="main.py",
+        description="Outputs patched executable into out.exe. Use build_installer.sh to create an installer.",
+    )
+    
+    parser.add_argument('-t', '--type', choices=['steam_win', 'win'], default='steam_win', help="the version of the game")
+    parser.add_argument('-c', '--clean', action='store_true')
+    args = parser.parse_args()
+    
     custom_code_path = resource_path('bin/custom_code.bin')
     custom_code_symbols_path = resource_path('bin/custom_code_symbols.o')
-    hooks_path = resource_path('data/hooks.yaml')
+    hooks_path = resource_path(f'data/hooks_{args.type}.yaml')
+    
+    executable_name = "WorldOfGoo2.exe" if args.type == "steam_win" else "World of Goo 2.exe"
     
     with open(custom_code_path, 'rb') as f:
         section_content = f.read()
@@ -58,9 +75,9 @@ def dev_main():
     with open(hooks_path, 'r') as f:
         hooks_str = f.read()
     
-    if not isfile('out.exe') or (len(argv) >= 2 and argv[1] in ['--clean', '-c']):
-        print('Reading WorldOfGoo2.exe...')
-        pe = PE("WorldOfGoo2.exe")
+    if not isfile('out.exe') or args.clean:
+        print(f'Reading {executable_name}...')
+        pe = PE(executable_name)
         
         add_section_header(pe, len(section_content))
         
