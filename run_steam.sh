@@ -1,5 +1,5 @@
 #!/bin/bash
-./build.sh "$1" || exit $?
+./build.sh -t steam_win $@ || exit $?
 
 if [ "$WOG2_PATH" == "" ]; then
     echo 'Please set the environment variable $WOG2_PATH'
@@ -11,4 +11,4 @@ fi
 
 cp out.exe "$WOG2_PATH/WorldOfGoo2.exe"
 echo "Launching World of Goo 2..."
-"$WOG2_PATH/WorldOfGoo2.exe"
+steam steam://rungameid/3385670

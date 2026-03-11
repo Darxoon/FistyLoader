@@ -30,7 +30,7 @@ def add_section_header(pe: PE, section_size: int):
     
     print(f"Virtual address of new section: 0x{section.VirtualAddress:x}")
 
-def patch_game(file: BufferedRandom, game_bytes: bytes, section_content: bytes, symtab: SymbolTableSection, hooks: dict):
+def patch_game(ver: str, file: BufferedRandom, game_bytes: bytes, section_content: bytes, symtab: SymbolTableSection, hooks: dict):
     game_bytes_arr: array[int] = array('I', game_bytes)
     pe_header_start = game_bytes_arr.index(int.from_bytes(b'PE\0\0', byteorder='little'))
     
@@ -45,7 +45,7 @@ def patch_game(file: BufferedRandom, game_bytes: bytes, section_content: bytes, 
     
     file.seek(fisty_section_offset)
     file.write(section_content)
-    inject_hooks(file, symtab, hooks)
+    inject_hooks(ver, file, symtab, hooks)
 
 def resource_path(relative_path):
     """ Get absolute path to resource, works for dev and for PyInstaller """
@@ -93,7 +93,7 @@ def dev_main():
     hooks = yaml.safe_load(hooks_str)['hooks']
     
     with open('out.exe', 'rb+') as f:
-        patch_game(f, f.read(), section_content, symtab, hooks)
+        patch_game(args.type, f, f.read(), section_content, symtab, hooks)
 
 if __name__ == '__main__':
     dev_main()

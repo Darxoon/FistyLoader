@@ -43,7 +43,7 @@ void initBallTable() {
     FileHandle handle;
     storage->FileOpen("log.txt", 0x22, &handle);
     initPrint(storage, handle);
-    print("Test\n");
+    PRINT("Test\n");
 #endif
     
     if (storage->FileExists(ballTablePath)) {
@@ -170,6 +170,8 @@ void loadBallTable(Storage* storage) {
         if (contentLen == 0)
             continue;
         
+        PRINT("line %d: %.*s\n", ballId, contentLen, content);
+        
         strncpy(stringBuf, content, contentLen);
         stringBuf[contentLen] = 0;
         
@@ -179,6 +181,8 @@ void loadBallTable(Storage* storage) {
     
     customGooballIds = gooballIds;
     gooballCount = gooballIdCount;
+    
+    PRINT("%d gooballs\n", gooballIdCount);
     
     free(inputFile);
 }

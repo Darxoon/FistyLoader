@@ -73,9 +73,7 @@ bool BallTemplateInfo_deserializeExt(BallTemplateInfoExt* info, int ballType, co
             return false;
     }
     
-#ifdef ENABLE_LOGGING
-    print("deserializing gooball %d %s: %s\n", ballType, info->name, info->editorButtonImageId.imageId);
-#endif
+    PRINT("deserializing gooball %d %s: %s\n", ballType, info->name, info->editorButtonImageId.imageId);
     
     return true;
 }
