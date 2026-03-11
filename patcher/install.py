@@ -16,8 +16,8 @@ def install():
     if os.name == 'nt':
         just_fix_windows_console()
     
-    custom_code_path = resource_path('custom_code.bin')
-    custom_code_symbols_path = resource_path('custom_code_symbols.o')
+    custom_code_path = resource_path('bin/custom_code.bin')
+    custom_code_symbols_path = resource_path('bin/custom_code_symbols.o')
     hooks_path = resource_path('data/hooks.yaml')
     
     with open(custom_code_path, 'rb') as f:

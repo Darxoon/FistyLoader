@@ -23,8 +23,8 @@ if [ "$1" != "--no-compile" ]; then
     ./build.sh --no-debug
 fi
 
-pyinstaller -F patcher/install.py --add-data patcher/custom_code.bin:. \
-    --add-data patcher/custom_code_symbols.o:. --add-data patcher/data/hooks.yaml:data \
+pyinstaller -F patcher/install.py --add-data patcher/bin/custom_code.bin:. \
+    --add-data patcher/bin/custom_code_symbols.o:. --add-data patcher/data/hooks.yaml:data \
     --recursive-copy-metadata readchar --name FistyLoader_Install --clean
 
 echo Done.

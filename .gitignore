@@ -10,7 +10,7 @@ game
 disasm
 build
 dist
+patcher/bin
 
-patcher/custom_code.bin
 symbols.map
 *.spec

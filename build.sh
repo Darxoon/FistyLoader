@@ -7,7 +7,7 @@ preprocess() {
 compile() {
     nasm patch/main.s -f elf64 -o patch/build/main.o &
     
-    CFLAGS="-c -I include -mabi=ms -O2 -fno-stack-protector"
+    CFLAGS="-c -I include -mabi=ms -O2 -fno-stack-protector -pedantic -pedantic-errors -Wall -Wextra"
     if [ "$ENABLE_LOGGING" == 1 ]; then
         CFLAGS="$CFLAGS -D ENABLE_LOGGING"
     fi
@@ -23,8 +23,8 @@ link() {
 }
 
 copy() {
-    objcopy patch/build/custom_code.o -O binary patcher/custom_code.bin
-    objcopy patch/build/custom_code.o --only-keep-debug patcher/custom_code_symbols.o
+    objcopy patch/build/custom_code.o -O binary patcher/bin/custom_code.bin
+    objcopy patch/build/custom_code.o --only-keep-debug patcher/bin/custom_code_symbols.o
 }
 
 build_debug() {

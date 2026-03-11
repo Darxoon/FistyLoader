@@ -1,6 +1,5 @@
 #include "wog2/misc.h"
 #include "wog2/environment.h"
-#include "wog2/templateInfo.h"
 #include "wog2/ballFactory.h"
 #include "ballTable.h"
 #include "log.h"
@@ -125,6 +124,8 @@ void loadBallTable(Storage* storage) {
             case ReadLineResult::ERROR:
                 fixBallTable(storage, inputFile, fileSize, lineNumber);
                 return;
+            default:
+                break;
         }
         
         if (ballId > maxGooballId)

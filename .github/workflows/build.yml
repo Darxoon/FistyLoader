@@ -43,12 +43,12 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: custom_code.bin
-        path: patcher/custom_code.bin
+        path: patcher/bin/custom_code.bin
     - name: Upload custom_code_symbols
       uses: actions/upload-artifact@v4
       with:
         name: custom_code_symbols.o
-        path: patcher/custom_code_symbols.o
+        path: patcher/bin/custom_code_symbols.o
   
   build_windows:
     runs-on: windows-latest

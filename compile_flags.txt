@@ -1,3 +1,7 @@
 -Iinclude
 -xc++
 -DENABLE_LOGGING
+-pedantic
+-pedantic-errors
+-Wall
+-Wextra
