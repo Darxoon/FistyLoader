@@ -13,7 +13,7 @@ cJSON_IsObject = 0x1d6c4;
 
 FileSystemUtils_CreateDir = 0x4667c0;
 Environment_instance = 0x41ec40;
-BallTemplateInfo_deserialize = 0x19213;
+BallTemplateInfo_initialize = 0x19213;
 GetImageIdInfo = 0x21d4d0;
 GetGooBallName = 0x27b5b0;
 AddGooballButton = 0x23b0f0;

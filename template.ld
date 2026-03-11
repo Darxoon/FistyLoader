@@ -1,6 +1,6 @@
 SECTIONS
 {
-    . = 0x24FC000;
+    . = FISTY_BASE_OFFSET;
     .fisty : {
         *(.fisty)
         *(.text)

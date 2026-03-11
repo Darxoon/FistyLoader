@@ -15,11 +15,17 @@ def generate_asm_definitions(ver_path: Path, hooks: list[Hook]):
     with open(ver_path / 'build/hook_returns.inc.s', 'w') as f:
         f.write(result)
 
-def generate_linker_script(ver_path: Path, hooks: list[Hook]):
+def generate_linker_script(ver: str, ver_path: Path, hooks: list[Hook]):
     with open(ver_path / 'game_symbols.ld', 'r') as f:
         game_symbols = f.read()
     with open("template.ld", 'r') as f:
         ld_template = f.read()
+    
+    match ver:
+        case "steam_win":
+            ld_template = ld_template.replace("FISTY_BASE_OFFSET", "0x24FC000")
+        case "win":
+            ld_template = ld_template.replace("FISTY_BASE_OFFSET", "0x24F3000")
     
     result = "/* game symbols */\n" + game_symbols + "\n/* hook returns */\n"
     
@@ -47,7 +53,7 @@ def preprocess_hooks():
     hooks = [Hook.from_dict(symbol_name, args) for symbol_name, args in hooks_dict.items()]
     
     generate_asm_definitions(ver_path, hooks)
-    generate_linker_script(ver_path, hooks)
+    generate_linker_script(ver, ver_path, hooks)
 
 if __name__ == '__main__':
     preprocess_hooks()

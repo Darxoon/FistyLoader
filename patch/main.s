@@ -3,7 +3,7 @@ BITS 64
 extern SDL_ShowSimpleMessageBox
 extern FileSystemUtils_CreateDir
 extern Environment_instance
-extern BallTemplateInfo_deserialize
+extern BallTemplateInfo_initialize
 
 extern gooballIds
 
@@ -68,6 +68,7 @@ load_config_hook:
     jmp load_config_hook_return
 
 %ifdef STEAM
+
 ; eolgizmo_hook
 ;
 ; Hooks into EOLGizmo::update and makes it use the custom gooballIds
@@ -215,7 +216,7 @@ ball_deserialize_hook2:
     
     ; original code
     mov rcx,rdi
-    call BallTemplateInfo_deserialize
+    call BallTemplateInfo_initialize
     
     jmp ball_deserialize_hook2_return
 

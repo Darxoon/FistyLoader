@@ -1,7 +1,6 @@
 #pragma once
 
-#include "wog2/misc.h"
-#include "wog2/templateInfo.h"
+#include "wog2/misc.h" // IWYU pragma: keep (it exports std::string, which clangd doesn't realize)
 
 #define BASE_GOOBALL_COUNT 39
 

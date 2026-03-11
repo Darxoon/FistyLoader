@@ -1,5 +1,6 @@
 #pragma once
 
+#include "wog2/json.h"
 #include "wog2/templateInfo.h"
 #include "wog2/ballFactory.h"
 #include "ballTable.h"
