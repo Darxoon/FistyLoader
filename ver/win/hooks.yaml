@@ -53,25 +53,25 @@ hooks:
     target_addr: 0x20ec80
     byte_length: 5
   
-  # # EOLGizmo::update: mov rbx, qword [r15+rcx*8+gooballIds]
-  # eolgizmo_hook:
-  #   target_addr: 0x22f400
-  #   byte_length: 8
+  # EOLGizmo::update: mov rbx, qword [r15+rcx*8+gooballIds]
+  eolgizmo_hook:
+    target_addr: 0x22f740
+    byte_length: 8
   
-  # # Custom gooballs in items and launchers
-  # # Item::createObjects: movss xmm3, 38.0
-  # create_objects_hook:
-  #   target_addr: 0x29889f
-  #   byte_length: 8
-  # # ItemPipeIn::spawnBall: lea rax, [gooBallIds] -> mov rax, [customGooBallIds]
-  # itempipein_spawnball_hook:
-  #   target_addr: 0x2be7b9
-  #   byte_length: 7
+  # Custom gooballs in items and launchers
+  # Item::createObjects: movss xmm3, 38.0
+  create_objects_hook:
+    target_addr: 0x296eef
+    byte_length: 8
+  # ItemPipeIn::spawnBall: lea rax, [gooBallIds] -> mov rax, [customGooBallIds]
+  itempipein_spawnball_hook:
+    target_addr: 0x2bce09
+    byte_length: 7
   
-  # # LauncherUtils::tryShootBall (?): lea rdx, [gooBallIds]
-  # try_shoot_ball_hook:
-  #   target_addr: 0x2db789
-  #   byte_length: 7
+  # LauncherUtils::tryShootBall (?): lea rdx, [gooBallIds]
+  try_shoot_ball_hook:
+    target_addr: 0x2d9dd9
+    byte_length: 7
   
   # Watermark in loading screen
   # LoadingScreenRenderer::constructor: lea rdx, ""

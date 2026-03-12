@@ -67,7 +67,6 @@ load_config_hook:
     mov qword [rsp+8], rbx
     jmp load_config_hook_return
 
-%ifdef STEAM
 
 ; eolgizmo_hook
 ;
@@ -80,7 +79,6 @@ eolgizmo_hook:
     
     jmp eolgizmo_hook_return
 
-%endif
 
 ; ballfactory_start_hook
 ;
@@ -166,7 +164,6 @@ get_template_info_hook:
     cmp r9, r8
     jmp get_template_info_hook_return
 
-%ifdef STEAM
 
 ; create_objects_hook
 ; 
@@ -180,7 +177,6 @@ create_objects_hook:
     cvtsi2ss xmm3, ecx
     jmp create_objects_hook_return
 
-%endif
 
 ; ball_deserialize_start_hook
 ;
@@ -223,7 +219,6 @@ ball_deserialize_hook2:
     
     jmp ball_deserialize_hook2_return
 
-%ifdef STEAM
 
 ; itempipein_spawnball_hook
 ;
@@ -233,7 +228,6 @@ itempipein_spawnball_hook:
     mov rax, [rel customGooballIds]
     jmp itempipein_spawnball_hook_return
 
-%endif
 
 ; loading_screen_hook
 ; 
@@ -291,6 +285,7 @@ set_state_from_ball_hook:
     
     jmp set_state_from_ball_hook_return
 
+%endif
 
 ; try_shoot_ball_hook
 ;
@@ -299,6 +294,7 @@ try_shoot_ball_hook:
     mov rdx, [rel customGooballIds]
     jmp try_shoot_ball_hook_return
 
+%ifdef STEAM
 
 ; editor_element_initialize_hook
 ; 
