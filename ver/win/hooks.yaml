@@ -7,51 +7,51 @@ hooks:
   
   # Loading of custom gooballs
   # BallTemplateInfoUtils::Deserialize: lea rax, [gooBallIds]
-  # ball_deserialize_start_hook:
-  #   target_addr: 0x214015
-  #   byte_length: 6
-  # # BallTemplateInfoUtils::Deserialize: lea rax, [gooBallIds]
-  # ball_deserialize_hook:
-  #   target_addr: 0x21402f
-  #   byte_length: 7
-  # # BallTemplateInfoUtils::Deserialize: lea rax, [gooBallIds]
-  # ball_deserialize_hook2:
-  #   target_addr: 0x215f45
-  #   byte_length: 8
+  ball_deserialize_start_hook:
+    target_addr: 0x214355
+    byte_length: 6
+  # BallTemplateInfoUtils::Deserialize: lea rax, [gooBallIds]
+  ball_deserialize_hook:
+    target_addr: 0x21436f
+    byte_length: 7
+  # BallTemplateInfoUtils::Deserialize: lea rax, [gooBallIds]
+  ball_deserialize_hook2:
+    target_addr: 0x216285
+    byte_length: 8
   
-  # # BallFactory::load (before loop)
-  # ballfactory_start_hook:
-  #   target_addr: 0x20e9f2
-  #   byte_length: 13
-  # # BallFactory::load (during loop)
-  # ballfactory_loop_hook:
-  #   target_addr: 0x20ea90
-  #   byte_length: 6
-  # # BallFactory::init: mov ecx, 0xbaf810
-  # ballfactory_init_hook:
-  #   target_addr: 0x20e964
-  #   byte_length: 5
-  # # BallFactory::BallFactory: mov r8d, 0x27
-  # ballfactory_constructor_hook1:
-  #   target_addr: 0x20e2c6
-  #   byte_length: 11
-  # # BallFactory::BallFactory: mov dword [rdi+0x8], 0x27
-  # ballfactory_constructor_hook2:
-  #   target_addr: 0x20e2e6
-  #   byte_length: 7
-  # # BallFactory::getTemplateInfo: movsxd rax, r9d + imul r10, rax, 0x4cb48 (= sizeof(BallTemplateInfo))
-  # get_template_info_start_hook:
-  #   target_addr: 0x20e8c0
-  #   byte_length: 10
-  # # BallFactory::getTemplateInfo: inc r9 + cmp r9, 0x27
-  # get_template_info_hook:
-  #   target_addr: 0x20e8f7
-  #   byte_length: 7
+  # BallFactory::load (before loop)
+  ballfactory_start_hook:
+    target_addr: 0x20ed32
+    byte_length: 13
+  # BallFactory::load (during loop)
+  ballfactory_loop_hook:
+    target_addr: 0x20edd0
+    byte_length: 6
+  # BallFactory::init: mov ecx, 0xbaf810
+  ballfactory_init_hook:
+    target_addr: 0x20eca4
+    byte_length: 5
+  # BallFactory::BallFactory: mov r8d, 0x27
+  ballfactory_constructor_hook1:
+    target_addr: 0x20e606
+    byte_length: 11
+  # BallFactory::BallFactory: mov dword [rdi+0x8], 0x27
+  ballfactory_constructor_hook2:
+    target_addr: 0x20e626
+    byte_length: 7
+  # BallFactory::getTemplateInfo: movsxd rax, r9d + imul r10, rax, 0x4cb48 (= sizeof(BallTemplateInfo))
+  get_template_info_start_hook:
+    target_addr: 0x20ec00
+    byte_length: 10
+  # BallFactory::getTemplateInfo: inc r9 + cmp r9, 0x27
+  get_template_info_hook:
+    target_addr: 0x20ec37
+    byte_length: 7
   
-  # # BallFactory::getTemplateInfo(int typeEnum) (custom implementation)
-  # _ZN11BallFactoryI19BallTemplateInfoExtE15getTemplateInfoEi:
-  #   target_addr: 0x20e940
-  #   byte_length: 5
+  # BallFactory::getTemplateInfo(int typeEnum) (custom implementation)
+  _ZN14BallFactoryExt15getTemplateInfoEi:
+    target_addr: 0x20ec80
+    byte_length: 5
   
   # # EOLGizmo::update: mov rbx, qword [r15+rcx*8+gooballIds]
   # eolgizmo_hook:
@@ -73,11 +73,11 @@ hooks:
   #   target_addr: 0x2db789
   #   byte_length: 7
   
-  # # Watermark in loading screen
-  # # LoadingScreenRenderer::constructor: lea rdx, ""
-  # loading_screen_hook:
-  #   target_addr: 0x35012a
-  #   byte_length: 7
+  # Watermark in loading screen
+  # LoadingScreenRenderer::constructor: lea rdx, ""
+  loading_screen_hook:
+    target_addr: 0x34db1a
+    byte_length: 7
   
   # # Level editor
   # # GetGooBallName: lea rax, [gooBallIds]

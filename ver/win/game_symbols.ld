@@ -17,10 +17,10 @@ BallTemplateInfo_initialize = 0x21cd50;
 GetImageIdInfo = 0x21d810;
 GetGooBallName = 0x279c00;
 AddGooballButton = 0x23b380;
-/* BallFactory<BallTemplateInfoExt>::instance() */
-_ZN11BallFactoryI19BallTemplateInfoExtE8instanceEv = 0x20ecf0;
+/* BallFactory::instance() */
+_ZN11BallFactory8instanceEv = 0x20ecf0;
 
 gooballIds = 0x12e6de0;
 empty_string = 0xe8194e;
 
-/* ball_deserialize_hook2_return_error = 0x215f62; */
+ball_deserialize_hook2_return_error = 0x2162a2;

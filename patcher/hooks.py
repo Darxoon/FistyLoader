@@ -74,3 +74,6 @@ def inject_hooks(ver: str, file: BufferedRandom, symtab: SymbolTableSection, hoo
     if ver == "steam_win":
         # BallFactory::load: add r14, 0x4cb48 + cmp edi, 0x27 -> 7-byte nop + cmp edi, r14d (unhardcode gooball cap)
         overwrite_bytes(file, 0x14020eab5, bytes([0x0F, 0x1F, 0x80, 0x00, 0x00, 0x00, 0x00, 0x44, 0x39, 0xf7]))
+    elif ver == "win":
+        # BallFactory::load: add r14, 0x4cb48 + cmp edi, 0x27 -> 7-byte nop + cmp edi, r14d (unhardcode gooball cap)
+        overwrite_bytes(file, 0x14020edf5, bytes([0x0F, 0x1F, 0x80, 0x00, 0x00, 0x00, 0x00, 0x44, 0x39, 0xf7]))

@@ -80,6 +80,7 @@ eolgizmo_hook:
     
     jmp eolgizmo_hook_return
 
+%endif
 
 ; ballfactory_start_hook
 ;
@@ -165,6 +166,7 @@ get_template_info_hook:
     cmp r9, r8
     jmp get_template_info_hook_return
 
+%ifdef STEAM
 
 ; create_objects_hook
 ; 
@@ -178,6 +180,7 @@ create_objects_hook:
     cvtsi2ss xmm3, ecx
     jmp create_objects_hook_return
 
+%endif
 
 ; ball_deserialize_start_hook
 ;
@@ -220,6 +223,7 @@ ball_deserialize_hook2:
     
     jmp ball_deserialize_hook2_return
 
+%ifdef STEAM
 
 ; itempipein_spawnball_hook
 ;
@@ -229,6 +233,7 @@ itempipein_spawnball_hook:
     mov rax, [rel customGooballIds]
     jmp itempipein_spawnball_hook_return
 
+%endif
 
 ; loading_screen_hook
 ; 
@@ -239,6 +244,7 @@ loading_screen_hook:
     lea rdx, [rel loadingText]
     jmp loading_screen_hook_return
 
+%ifdef STEAM
 
 ; get_gooball_name_hook1
 ;
@@ -311,4 +317,4 @@ ballTablePath db "fisty/ballTable.ini", 00h
 
 baseGooballCount equ 39
 
-loadingText db "Using FistyLoader v1.1", 00h
+loadingText db "Using FistyLoader v1.1.1", 00h
