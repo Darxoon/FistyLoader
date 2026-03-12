@@ -6,6 +6,37 @@
 #include "ballTable.h"
 #include "log.h"
 
+// this overrides the original getTemplateInfo
+// to extend for error handling and unhardcode BallTemplateInfo size
+BallTemplateInfo* BallFactoryExt::getTemplateInfo(int typeEnum) {
+    BallTemplateInfoExt* templateInfos = (BallTemplateInfoExt*)m_rawTemplateInfos;
+    
+    if (typeEnum < 0 || typeEnum >= gooballCount || !templateInfos[typeEnum].isInitialized()) {
+        PRINT("Loading typeEnum %d (out of %d): %s\n", typeEnum, gooballCount,
+            typeEnum > 0 && typeEnum < gooballCount ? templateInfos[typeEnum].name : "N/A");
+        
+        char buffer[0x40];
+        snprintf(buffer, sizeof(buffer),
+            "Error loading gooball:\n"
+            "Unknown typeEnum %d.\n", typeEnum);
+        
+        SDL_ShowSimpleMessageBox(0x10, "Fisty Loader", buffer, 0);
+        return nullptr;
+    }
+    
+    return &templateInfos[typeEnum];
+}
+
+BallTemplateInfo* BallFactoryExt::getTemplateInfoOrNull(int typeEnum) {
+    BallTemplateInfoExt* templateInfos = (BallTemplateInfoExt*)m_rawTemplateInfos;
+    
+    if (typeEnum < 0 || typeEnum >= gooballCount || !templateInfos[typeEnum].isInitialized()) {
+        return nullptr;
+    }
+    
+    return &templateInfos[typeEnum];
+}
+
 extern "C" {
 
 size_t getTemplateInfoOffset(int i) {
@@ -78,8 +109,8 @@ bool BallTemplateInfo_deserializeExt(BallTemplateInfoExt* info, int ballType, co
     return true;
 }
 
-static void tryAddButton(BallFactory<BallTemplateInfoExt>* ballFactory, int typeEnum) {
-    BallTemplateInfoExt* info = ballFactory->getTemplateInfoUnchecked(typeEnum);
+static void tryAddButton(BallFactoryExt* ballFactory, int typeEnum) {
+    BallTemplateInfoExt* info = (BallTemplateInfoExt*)ballFactory->getTemplateInfoOrNull(typeEnum);
     if (info == nullptr)
         return;
     
@@ -92,7 +123,7 @@ static void tryAddButton(BallFactory<BallTemplateInfoExt>* ballFactory, int type
 }
 
 void addGooballButtons() {
-    BallFactory<BallTemplateInfoExt>* ballFactory = BallFactory<BallTemplateInfoExt>::instance();
+    BallFactoryExt* ballFactory = (BallFactoryExt*)BallFactory::instance();
     
     for (int i : defaultGooballButtons) {
         tryAddButton(ballFactory, i);
@@ -108,6 +139,3 @@ void addGooballButtons() {
 }
 
 }
-
-// explicitly instantiate getTemplateInfo
-template BallTemplateInfoExt* BallFactory<BallTemplateInfoExt>::getTemplateInfo(int typeEnum);

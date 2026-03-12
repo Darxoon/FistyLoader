@@ -144,7 +144,7 @@ ballfactory_constructor_hook2:
 
 ; get_template_info_start_hook
 ; 
-; Hooks into BallFactory::getTemplateInfo and replaces the templateInfos
+; Hooks into BallFactory::getTemplateInfo(std::string) and replaces the templateInfos
 ; array index with my own getTemplateInfoOffset function, in order to
 ; unhardcode the BallTemplateInfo size
 get_template_info_start_hook:
@@ -157,7 +157,7 @@ get_template_info_start_hook:
 
 ; get_template_info_hook
 ; 
-; Hooks into BallFactory::getTemplateInfo and modifies the
+; Hooks into BallFactory::getTemplateInfo(std::string) and modifies the
 ; amount of templateInfos it iterates through to gooballCount
 get_template_info_hook:
     inc r9 ; r9 = i

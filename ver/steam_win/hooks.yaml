@@ -39,17 +39,17 @@ hooks:
   ballfactory_constructor_hook2:
     target_addr: 0x20e2e6
     byte_length: 7
-  # BallFactory::getTemplateInfo: movsxd rax, r9d + imul r10, rax, 0x4cb48 (= sizeof(BallTemplateInfo))
+  # BallFactory::getTemplateInfo(std::string): movsxd rax, r9d + imul r10, rax, 0x4cb48 (= sizeof(BallTemplateInfo))
   get_template_info_start_hook:
     target_addr: 0x20e8c0
     byte_length: 10
-  # BallFactory::getTemplateInfo: inc r9 + cmp r9, 0x27
+  # BallFactory::getTemplateInfo(std::string): inc r9 + cmp r9, 0x27
   get_template_info_hook:
     target_addr: 0x20e8f7
     byte_length: 7
   
   # BallFactory::getTemplateInfo(int typeEnum) (custom implementation)
-  _ZN11BallFactoryI19BallTemplateInfoExtE15getTemplateInfoEi:
+  _ZN11BallFactory15getTemplateInfoEi:
     target_addr: 0x20e940
     byte_length: 5
   

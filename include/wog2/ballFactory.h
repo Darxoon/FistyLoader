@@ -1,24 +1,21 @@
 #pragma once
 
 #include "wog2/misc.h" // IWYU pragma: keep (it exports std::string, which clangd doesn't realize)
+#include "wog2/templateInfo.h"
 
 #define BASE_GOOBALL_COUNT 39
 
-template<typename TemplateInfo>
 struct BallFactory {
 public:
-    static BallFactory<TemplateInfo>* instance();
+    static BallFactory* instance();
     
     virtual void destructorWorkaround();
     
-    TemplateInfo* getTemplateInfo(int typeEnum);
-    TemplateInfo* getTemplateInfo(const std::string& id);
+    BallTemplateInfo* getTemplateInfo(int typeEnum);
+    BallTemplateInfo* getTemplateInfo(const std::string& id);
     
-    // custom method
-    TemplateInfo* getTemplateInfoUnchecked(int typeEnum);
-    
-private:
-    TemplateInfo* m_templateInfos;
+protected:
+    BallTemplateInfo* m_rawTemplateInfos;
     int m_ballCount;
     
     // originally, there would be a static array here
