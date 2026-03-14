@@ -11,8 +11,8 @@ SDL_ShowSimpleMessageBox = 0x897f10;
 cJSON_GetObjectItemCaseSensitive = 0x187a;
 cJSON_IsObject = 0x1d51b;
 
-FileSystemUtils_CreateDir = 0x460550;
-Environment_instance = 0x418440;
+_ZN15FileSystemUtils9CreateDirEPKc = 0x460550;
+_ZN11Environment8instanceEv = 0x418440;
 BallTemplateInfo_initialize = 0x21cd50;
 GetImageIdInfo = 0x21d810;
 GetGooBallName = 0x279c00;

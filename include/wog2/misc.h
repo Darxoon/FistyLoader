@@ -16,6 +16,10 @@ namespace std {
     class string {};
 }
 
+namespace FileSystemUtils {
+    void CreateDir(const char* path);
+}
+
 extern "C" {
     extern const char* gooballIds[0x27];
     
@@ -28,8 +32,6 @@ extern "C" {
     int get_errno( int * pValue );
     long strtol( const char* str, char** str_end, int base );
     int isspace( int ch );
-    
-    void FileSystemUtils_CreateDir(const char* path);
     
     bool SDL_ShowSimpleMessageBox(int flags, const char *title, const char *message, void *window);
 };

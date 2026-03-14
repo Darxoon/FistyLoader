@@ -22,6 +22,8 @@ public:
 
 class Environment {
 public:
+    static Environment* instance();
+
     // there are so many that i do not care about lol
     // TODO: i should probably still document their vtable offsets
     virtual UNK_RETURN init();
@@ -70,8 +72,4 @@ public:
     virtual Storage* getStorage();
     
     // ... (28 more)
-};
-
-extern "C" {
-    Environment* Environment_instance();
 };

@@ -8,7 +8,7 @@
 
 // this overrides the original getTemplateInfo
 // to extend for error handling and unhardcode BallTemplateInfo size
-BallTemplateInfo* BallFactoryExt::getTemplateInfo(int typeEnum) {
+BallTemplateInfoExt* BallFactoryExt::getTemplateInfo(int typeEnum) {
     BallTemplateInfoExt* templateInfos = (BallTemplateInfoExt*)m_rawTemplateInfos;
     
     if (typeEnum < 0 || typeEnum >= gooballCount || !templateInfos[typeEnum].isInitialized()) {
@@ -27,7 +27,7 @@ BallTemplateInfo* BallFactoryExt::getTemplateInfo(int typeEnum) {
     return &templateInfos[typeEnum];
 }
 
-BallTemplateInfo* BallFactoryExt::getTemplateInfoOrNull(int typeEnum) {
+BallTemplateInfoExt* BallFactoryExt::getTemplateInfoOrNull(int typeEnum) {
     BallTemplateInfoExt* templateInfos = (BallTemplateInfoExt*)m_rawTemplateInfos;
     
     if (typeEnum < 0 || typeEnum >= gooballCount || !templateInfos[typeEnum].isInitialized()) {
@@ -110,7 +110,7 @@ bool BallTemplateInfo_deserializeExt(BallTemplateInfoExt* info, int ballType, co
 }
 
 static void tryAddButton(BallFactoryExt* ballFactory, int typeEnum) {
-    BallTemplateInfoExt* info = (BallTemplateInfoExt*)ballFactory->getTemplateInfoOrNull(typeEnum);
+    BallTemplateInfoExt* info = ballFactory->getTemplateInfoOrNull(typeEnum);
     if (info == nullptr)
         return;
     
@@ -123,7 +123,7 @@ static void tryAddButton(BallFactoryExt* ballFactory, int typeEnum) {
 }
 
 void addGooballButtons() {
-    BallFactoryExt* ballFactory = (BallFactoryExt*)BallFactory::instance();
+    BallFactoryExt* ballFactory = BallFactoryExt::instance();
     
     for (int i : defaultGooballButtons) {
         tryAddButton(ballFactory, i);

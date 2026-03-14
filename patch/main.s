@@ -1,8 +1,5 @@
 BITS 64
 
-extern SDL_ShowSimpleMessageBox
-extern FileSystemUtils_CreateDir
-extern Environment_instance
 extern BallTemplateInfo_initialize
 
 extern gooballIds

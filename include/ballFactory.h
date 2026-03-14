@@ -4,16 +4,19 @@
 #include "wog2/templateInfo.h"
 #include "wog2/ballFactory.h"
 
-class BallFactoryExt : public BallFactory {
-public:
-    BallTemplateInfo* getTemplateInfo(int typeEnum);
-    BallTemplateInfo* getTemplateInfoOrNull(int typeEnum);
-};
-
-static_assert(sizeof(BallFactoryExt) == sizeof(BallFactory));
-
 struct BallTemplateInfoExt : public BallTemplateInfo {
     ImageIdInfo editorButtonImageId;
+};
+
+class BallFactoryExt : public BallFactory {
+public:
+    BallTemplateInfoExt* getTemplateInfo(int typeEnum);
+    BallTemplateInfoExt* getTemplateInfoOrNull(int typeEnum);
+    
+public:
+    static BallFactoryExt* instance() {
+        return (BallFactoryExt*)BallFactory::instance();
+    }
 };
 
 extern "C" {
