@@ -238,7 +238,6 @@ loading_screen_hook:
     lea rdx, [rel loadingText]
     jmp loading_screen_hook_return
 
-%ifdef STEAM
 
 ; get_gooball_name_hook1
 ;
@@ -285,7 +284,6 @@ set_state_from_ball_hook:
     
     jmp set_state_from_ball_hook_return
 
-%endif
 
 ; try_shoot_ball_hook
 ;
@@ -294,7 +292,6 @@ try_shoot_ball_hook:
     mov rdx, [rel customGooballIds]
     jmp try_shoot_ball_hook_return
 
-%ifdef STEAM
 
 ; editor_element_initialize_hook
 ; 
@@ -305,7 +302,6 @@ editor_element_initialize_hook:
     
     jmp editor_element_initialize_hook_return
 
-%endif
 
 ; constants
 msgTitle db "Fisty Loader", 00h

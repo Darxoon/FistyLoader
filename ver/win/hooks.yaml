@@ -79,24 +79,24 @@ hooks:
     target_addr: 0x34db1a
     byte_length: 7
   
-  # # Level editor
-  # # GetGooBallName: lea rax, [gooBallIds]
-  # get_gooball_name_hook1:
-  #   target_addr: 0x27b5fa
-  #   byte_length: 7
-  # # GetGooBallName: add rdx, 0x27 + mov rcx, qword [rcx - 0x8]
-  # get_gooball_name_hook2:
-  #   target_addr: 0x27b738
-  #   byte_length: 8
-  # # ItemPropertiesGizmo::setStateFromItem: lea r9, [gooBallIds] + [...] + mov r8d, 0x26
-  # set_state_from_item_hook:
-  #   target_addr: 0x2c8872
-  #   byte_length: 21
-  # # ItemPropertiesGizmo::setStateFromBall: lea r9, [gooBallIds] + [...] + mov r8d, 0x26
-  # set_state_from_ball_hook:
-  #   target_addr: 0x2c7e53
-  #   byte_length: 20
-  # # EditorElementUtils::Initialize: mov ecx, 1 + [...] (GetGooballName, Add)
-  # editor_element_initialize_hook:
-  #   target_addr: 0x23b584
-  #   byte_length: 0x575
+  # Level editor
+  # GetGooBallName: lea rax, [gooBallIds]
+  get_gooball_name_hook1:
+    target_addr: 0x279c4a
+    byte_length: 7
+  # GetGooBallName: add rdx, 0x27 + mov rcx, qword [rcx - 0x8]
+  get_gooball_name_hook2:
+    target_addr: 0x279d88
+    byte_length: 8
+  # ItemPropertiesGizmo::setStateFromItem: lea r9, [gooBallIds] + [...] + mov r8d, 0x26
+  set_state_from_item_hook:
+    target_addr: 0x2c6ec2
+    byte_length: 21
+  # ItemPropertiesGizmo::setStateFromBall: lea r9, [gooBallIds] + [...] + mov r8d, 0x26
+  set_state_from_ball_hook:
+    target_addr: 0x2c64a3
+    byte_length: 20
+  # EditorElementUtils::Initialize: mov ecx, 1 + [...] (GetGooballName, Add)
+  editor_element_initialize_hook:
+    target_addr: 0x23b814
+    byte_length: 0x575
