@@ -23,8 +23,16 @@ if [ "$1" != "--no-compile" ]; then
     ./build.sh --no-debug
 fi
 
-pyinstaller -F patcher/install.py --add-data patcher/bin/custom_code.bin:. \
-    --add-data patcher/bin/custom_code_symbols.o:. --add-data patcher/data/hooks.yaml:data \
+# collect all version-specific files for all versions used by installer
+PYI_DATA=
+for VER_DIR in ver/*; do
+    PYI_DATA="$PYI_DATA \
+        --add-data $VER_DIR/hooks.yaml:$VER_DIR \
+        --add-data $VER_DIR/build/custom_code.bin:$VER_DIR/build \
+        --add-data $VER_DIR/build/custom_code_symbols.o:$VER_DIR/build"
+done
+
+pyinstaller -F patcher/install.py $PYI_DATA \
     --recursive-copy-metadata readchar --name FistyLoader_Install --clean
 
 echo Done.

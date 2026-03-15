@@ -1,9 +1,10 @@
 #!/bin/bash
 
 TYPE=steam_win
+BUILD_DEBUG=1
 
 parse_args() {
-    if ! options=$(getopt -o "t:ch" --long "type:,clean,help" -- "$@")
+    if ! options=$(getopt -o "t:ch" --long "type:,clean,help,no-debug" -- "$@")
     then
         # Error, getopt will put out a message for us
         exit 1
@@ -16,6 +17,9 @@ parse_args() {
             -t|--type)
                 TYPE=$2
                 shift
+            ;;
+            --no-debug)
+                BUILD_DEBUG=0
             ;;
             -h|--help)
                 # Inaccurate but i can't be bothered to write by hand
@@ -66,4 +70,4 @@ objcopy "ver/$TYPE/build/custom_code.o" -O binary "ver/$TYPE/build/custom_code.b
 objcopy "ver/$TYPE/build/custom_code.o" --only-keep-debug "ver/$TYPE/build/custom_code_symbols.o"
 
 # build debug executable
-[ "$1" != "--no-debug" ] && python3 patcher/main.py $@
+[ "$BUILD_DEBUG" != 0 ] && python3 patcher/main.py $@

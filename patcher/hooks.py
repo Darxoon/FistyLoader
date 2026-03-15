@@ -59,7 +59,7 @@ def hook_symbol(file: BufferedRandom, symtab: SymbolTableSection, virtual_addres
     [symbol] = symbols
     hook_addr(file, virtual_address, 0x140000000 | symbol.entry.st_value, padding=padding)
 
-def inject_hooks(ver: str, file: BufferedRandom, symtab: SymbolTableSection, hooks: dict):
+def inject_hooks(file: BufferedRandom, ver: str, symtab: SymbolTableSection, hooks: dict):
     print("Injecting hooks...")
     
     # Hooks
