@@ -2,8 +2,6 @@ name: Build FistyLoader
 
 on:
   push:
-    paths:
-      - '.github/workflows/*'
     branches:
       - master
 
@@ -39,16 +37,13 @@ jobs:
       with:
         name: FistyLoader_Install.tar.xz
         path: dist/FistyLoader_Install.tar.xz
-    - name: Upload custom_code
+    - name: Upload custom code
       uses: actions/upload-artifact@v4
       with:
-        name: custom_code.bin
-        path: patcher/bin/custom_code.bin
-    - name: Upload custom_code_symbols
-      uses: actions/upload-artifact@v4
-      with:
-        name: custom_code_symbols.o
-        path: patcher/bin/custom_code_symbols.o
+        name: custom_code
+        path: |
+          ver/*/build/custom_code.bin
+          ver/*/build/custom_code_symbols.o
   
   build_windows:
     runs-on: windows-latest
@@ -70,13 +65,8 @@ jobs:
     - name: Download custom_code
       uses: actions/download-artifact@v4
       with:
-        name: custom_code.bin
-        path: patcher/
-    - name: Download custom_code_symbols
-      uses: actions/download-artifact@v4
-      with:
-        name: custom_code_symbols.o
-        path: patcher/
+        name: custom_code
+        path: ver
       
       # Build windows installer
     - name: Build windows version
