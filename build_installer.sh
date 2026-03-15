@@ -32,6 +32,10 @@ for VER_DIR in ver/*; do
         --add-data $VER_DIR/build/custom_code_symbols.o:$VER_DIR/build"
 done
 
+echo $PYI_DATA
+ls ver/win/build
+ls ver/steam_win/build
+
 pyinstaller -F patcher/install.py $PYI_DATA \
     --recursive-copy-metadata readchar --name FistyLoader_Install --clean
 
