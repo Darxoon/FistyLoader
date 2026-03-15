@@ -20,7 +20,8 @@ pip install -r requirements.txt
 
 if [ "$1" != "--no-compile" ]; then
     # build custom code & custom code symbols
-    ./build.sh --no-debug
+    ./build.sh --no-debug --type steam_win
+    ./build.sh --no-debug --type win
 fi
 
 # collect all version-specific files for all versions used by installer
@@ -31,10 +32,6 @@ for VER_DIR in ver/*; do
         --add-data $VER_DIR/build/custom_code.bin:$VER_DIR/build \
         --add-data $VER_DIR/build/custom_code_symbols.o:$VER_DIR/build"
 done
-
-echo $PYI_DATA
-ls ver/win/build
-ls ver/steam_win/build
 
 pyinstaller -F patcher/install.py $PYI_DATA \
     --recursive-copy-metadata readchar --name FistyLoader_Install --clean
